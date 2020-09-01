@@ -42,6 +42,9 @@ function addMessage(author, content) {
     if (author === userName) {
         message.classList.add('message--self');
         messageHeader.innerHTML = 'You';
+    } else if (author === 'Chat bot') {
+        message.classList.add('message--bot');
+        messageHeader.innerHTML = author;
     } else {
         messageHeader.innerHTML = author;
     }

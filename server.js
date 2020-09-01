@@ -28,6 +28,7 @@ io.on('connection', (socket) => {
     console.log('New client! Its id – ' + socket.id);
     socket.on('user', ({ name }) => {
         users.push({ name: name, id: socket.id });
+        socket.broadcast.emit('message', ({ author: 'Chat bot', content: `${name} has joined the conversation!`}));
     });
     socket.on('message', (message) => { 
         console.log('Oh, I\'ve got something from ' + socket.id);
@@ -38,6 +39,7 @@ io.on('connection', (socket) => {
         console.log('Oh, socket ' + socket.id + ' has left');
         const userToDelete = users.find(user => user.id === socket.id);
         const userIndexToDelete = users.indexOf(userToDelete);
+        socket.broadcast.emit('message', ({ author: 'Chat bot', content: `${userToDelete.name} has left the conversation :(`}));
         users.splice(userIndexToDelete, 1);
     });
     console.log('I\'ve added a listener on message and disconnect events \n');
