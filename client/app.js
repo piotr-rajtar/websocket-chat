@@ -24,6 +24,7 @@ function login(event) {
         alert('This field should not be empty');
     } else {
         userName = userNameInput.value;
+        socket.emit('user', { name: userName });
         loginForm.classList.remove('show');
         messagesSection.classList.add('show');
     }
