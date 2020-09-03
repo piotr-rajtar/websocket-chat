@@ -39,14 +39,17 @@ function addMessage(author, content) {
     messageHeader.classList.add('message__author');
     messageBody.classList.add('message__content');
 
-    if (author === userName) {
-        message.classList.add('message--self');
-        messageHeader.innerHTML = 'You';
-    } else if (author === 'Chat bot') {
-        message.classList.add('message--bot');
-        messageHeader.innerHTML = author;
-    } else {
-        messageHeader.innerHTML = author;
+    switch(author) {
+        case userName: 
+            message.classList.add('message--self');
+            messageHeader.innerHTML = 'You';
+            break;
+        case 'Chat bot':     
+            message.classList.add('message--bot');
+            messageHeader.innerHTML = author;
+            break;
+        default:
+            messageHeader.innerHTML = author;
     }
 
     messageBody.innerHTML = content;
